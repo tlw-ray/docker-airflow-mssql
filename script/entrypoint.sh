@@ -59,7 +59,7 @@ wait_for_port() {
 if [ "$AIRFLOW__CORE__EXECUTOR" != "SequentialExecutor" ]; then
   AIRFLOW__CORE__SQL_ALCHEMY_CONN="mssql+pymssql://$MSSQL_USER:$MSSQL_PASSWORD@$MSSQL_HOST:$MSSQL_PORT/$MSSQL_DB"
   AIRFLOW__CELERY__RESULT_BACKEND="db+mssql://$MSSQL_USER:$MSSQL_PASSWORD@$MSSQL_HOST:$MSSQL_PORT/$MSSQL_DB"
-  wait_for_port MSSql" "$MSSQL_HOST" "$MSSQL_PORT"
+  wait_for_port "MSSql" "$MSSQL_HOST" "$MSSQL_PORT"
 fi
 
 if [ "$AIRFLOW__CORE__EXECUTOR" = "CeleryExecutor" ]; then
