@@ -1,6 +1,7 @@
 docker run \
 --name airflow-single \
 -d \
+-P \
 -e AIRFLOW__CORE__FERNET_KEY=6U-zYCcMQQifU7Vwc3es9TnZJkJ8AGZoLANfqDkKjts= \
 -e AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////usr/local/airflow/airflow.db \
 -e AIRFLOW__CORE_EXECUTOR=SequentialExecutor \
