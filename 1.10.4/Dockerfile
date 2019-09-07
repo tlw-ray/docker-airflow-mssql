@@ -47,6 +47,8 @@ RUN set -ex \
         rsync \
         netcat \
         locales \
+        language-pack-zh-hans \
+        language-pack-zh-hant \
         language-pack-zh-hans-base \
         language-pack-zh-hant-base \
     && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
