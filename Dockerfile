@@ -74,6 +74,9 @@ RUN set -ex \
 
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
+ADD src/timezone.py /usr/local/lib/python3.6/site-packages/airflow/utils/
+ADD src/sqlalchemy.py /usr/local/lib/python3.6/site-packages/airflow/utils/
+ADD src/master.html /usr/local/lib/python3.6/site-packages/airflow/www/templates/admin/
 
 RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
