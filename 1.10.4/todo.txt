@@ -1,0 +1,6 @@
+TODO
+1. 镜像时区设定为中国上海
+2. 代码时区覆盖入
+
+ 备忘:
+ -e AIRFLOW__CORE__EXECUTOR=LocalExecutor \
