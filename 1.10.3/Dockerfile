@@ -52,12 +52,6 @@ RUN set -ex \
         rsync \
         netcat \
         locales \
-#        language-pack-zh-hans \
-#        language-pack-zh-hant \
-#        language-pack-zh-hans-base \
-#        language-pack-zh-hant-base \
-    && sed -i 's/^# zh_CN.UTF-8 UTF-8$/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen \
-    && locale-gen \
     && update-locale LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_USER_HOME} airflow \
     && pip install -U pip setuptools wheel \
@@ -65,10 +59,10 @@ RUN set -ex \
     && pip install pyOpenSSL \
     && pip install ndg-httpsclient \
     && pip install pyasn1 \
-    && pip install pymssql \
-    && pip install apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,mssql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
-    && pip install 'redis==3.2' \
     && pip install 'Flask==1.0.4' \
+    && pip install 'pendulum==1.4.4' \
+    && pip install apache-airflow[crypto,celery,mssql,rabbitmq,redis,slack,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
+#    && pip install 'redis==3.2' \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \
     && apt-get purge --auto-remove -yqq $buildDeps \
     && apt-get autoremove -yqq --purge \
@@ -81,7 +75,6 @@ RUN set -ex \
         /usr/share/doc \
         /usr/share/doc-base
 
-# RUN /usr/share/locales/install-language-pack zh_CN
 COPY entrypoint.sh /entrypoint.sh
 COPY airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 ADD src/timezone.py /usr/local/lib/python3.6/site-packages/airflow/utils/
