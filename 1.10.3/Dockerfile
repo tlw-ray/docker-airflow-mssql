@@ -76,7 +76,7 @@ RUN set -ex \
         /usr/share/doc \
         /usr/share/doc-base
 
-RUN /usr/share/locales/install-language-pack zh_CN
+# RUN /usr/share/locales/install-language-pack zh_CN
 COPY entrypoint.sh /entrypoint.sh
 COPY airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 ADD src/timezone.py /usr/local/lib/python3.6/site-packages/airflow/utils/
