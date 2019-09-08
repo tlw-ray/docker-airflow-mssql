@@ -14,7 +14,13 @@ LABEL maintainer="tlw_ray@163.com"
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
-RUN apt-get install -y locales locales-all
+RUN apt-get update -yqq
+RUN apt-get upgrade -yqq
+RUN apt-get install -yqq --no-install-recommends apt-utils
+
+RUN apt-get update -yqq
+RUN apt-get upgrade -yqq
+RUN apt-get install -yqq --no-install-recommends locales locales-all
 
 # Define zh_CN.
 ENV LANGUAGE zh_CN.UTF-8
@@ -22,3 +28,4 @@ ENV LANG zh_CN.UTF-8
 ENV LC_ALL zh_CN.UTF-8
 ENV LC_CTYPE zh_CN.UTF-8
 ENV LC_MESSAGES zh_CN.UTF-8
+ENV TZ Asia/Shanghai
