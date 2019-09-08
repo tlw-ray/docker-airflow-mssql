@@ -16,10 +16,6 @@ ENV TERM linux
 
 RUN apt-get update -yqq
 RUN apt-get upgrade -yqq
-RUN apt-get install -yqq --no-install-recommends apt-utils
-
-RUN apt-get update -yqq
-RUN apt-get upgrade -yqq
 RUN apt-get install -yqq --no-install-recommends locales locales-all
 
 # Define zh_CN.
