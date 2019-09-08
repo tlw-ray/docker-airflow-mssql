@@ -47,10 +47,10 @@ RUN set -ex \
         rsync \
         netcat \
         locales \
-        language-pack-zh-hans \
-        language-pack-zh-hant \
-        language-pack-zh-hans-base \
-        language-pack-zh-hant-base \
+#        language-pack-zh-hans \
+#        language-pack-zh-hant \
+#        language-pack-zh-hans-base \
+#        language-pack-zh-hant-base \
     && sed -i 's/^# zh_CN.UTF-8 UTF-8$/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && update-locale LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8 \
