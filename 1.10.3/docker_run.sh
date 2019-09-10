@@ -1,6 +1,7 @@
+#!/usr/bin/env bash
+docker pull tlwtlw/docker-airflow:1.10.3-mssql
 docker run \
 --name airflow \
---rm \
 -d \
 -p 8080:8080 \
 -e LOAD_EX=y \
@@ -12,4 +13,5 @@ docker run \
 -v "${PWD}/../dags/:/usr/local/airflow/dags/" \
 -v "${PWD}/airflow.cfg:/usr/local/airflow/airflow.cfg" \
 -v "${PWD}/entrypoint.sh:/entrypoint.sh" \
-tlwtlw/docker-airflow:1.10.3.1-mssql
+tlwtlw/docker-airflow:1.10.3-mssql
+

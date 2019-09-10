@@ -1,10 +1,20 @@
 TODO
-1. 镜像时区设定为中国上海
-2. 代码时区覆盖入
-3. unable to locate package language-pack-zh
-4. The index 'ti_pool' is dependent on column 'pool'.
+1. 镜像时区设定为中国上海, 通过设定环境变量ENV TZ="Asiz/Shanghai"解决
+
+2. 代码时区覆盖入，已解决
+
+3. 以下问题通过apt-get update , apt-get upgrade, apt-get install loacales localeall解决
+    unable to locate package language-pack-zh
+
+4. TODO 以下问题在1.10.3中没有出现，是1.10.4引入的新的bug
+    The index 'ti_pool' is dependent on column 'pool'.
     DB-Lib error message 20018, severity 16:\n
     General SQL Server error: Check messages from the SQL Server\n
+
+5. 以下问题通过安装flask 1.1.1 和 pendulum 1.4.4解决
+    pendulum 1.4.4 requirement tzlocal<2.0.0.0,>=1.5.0.0 but you'll have tzlocal 2.0.0 which is incompatible
+    flask 1.1.1 has requirement Jinja2>=2.10.1, but you'll have jinja2 2.10 which is incomatible.
+    flask 1.1.1 has requirement Werkzeug>=0.15, but you'll have werkzeug 0.14.1 which is incompatible.
 
  备忘:
  -e AIRFLOW__CORE__EXECUTOR=LocalExecutor \
