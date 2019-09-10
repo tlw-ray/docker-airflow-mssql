@@ -73,10 +73,10 @@ echo "$AIRFLOW__CORE__EXECUTOR"
 case "$1" in
   webserver)
     airflow initdb
-    if [ "$AIRFLOW__CORE__EXECUTOR" = "LocalExecutor" ]; then
+    # if [ "$AIRFLOW__CORE__EXECUTOR" = "LocalExecutor" ]; then
       # With the "Local" executor it should all run in one container.
       airflow scheduler &
-    fi
+    # fi
     exec airflow webserver
     ;;
   worker|scheduler)
