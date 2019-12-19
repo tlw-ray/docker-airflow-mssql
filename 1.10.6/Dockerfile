@@ -71,8 +71,8 @@ RUN set -ex \
         /usr/share/doc \
         /usr/share/doc-base
 
-COPY script/entrypoint.sh /entrypoint.sh
-COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
+COPY entrypoint.sh /entrypoint.sh
+COPY airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 ADD src/timezone.py /usr/local/lib/python3.6/site-packages/airflow/utils/
 ADD src/sqlalchemy.py /usr/local/lib/python3.6/site-packages/airflow/utils/
 ADD src/master.html /usr/local/lib/python3.6/site-packages/airflow/www/templates/admin/
