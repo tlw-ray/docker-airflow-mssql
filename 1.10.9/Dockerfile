@@ -62,6 +62,7 @@ RUN set -ex \
     && pip install pyOpenSSL \
     && pip install ndg-httpsclient \
     && pip install pyasn1 \
+	&& pip install 'future==0.18.2' \
     && pip install apache-airflow[crypto,celery,postgres,mssql,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
     && pip install 'redis==3.2' \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \
@@ -76,8 +77,8 @@ RUN set -ex \
         /usr/share/doc \
         /usr/share/doc-base
 
-COPY script/entrypoint.sh /entrypoint.sh
-COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
+COPY entrypoint.sh /entrypoint.sh
+COPY airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 ADD src/timezone.py /usr/local/lib/python3.6/site-packages/airflow/utils/
 ADD src/sqlalchemy.py /usr/local/lib/python3.6/site-packages/airflow/utils/
 ADD src/master.html /usr/local/lib/python3.6/site-packages/airflow/www/templates/admin/
