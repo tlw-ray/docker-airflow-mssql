@@ -56,7 +56,6 @@ RUN set -ex \
         netcat \
         locales \
 	&& update-locale LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8 \
-    && useradd -ms /bin/bash -d ${AIRFLOW_USER_HOME} airflow \
     && pip install -U pip setuptools wheel \
     && pip install pytz \
     && pip install pyOpenSSL \
