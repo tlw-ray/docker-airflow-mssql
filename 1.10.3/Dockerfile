@@ -18,10 +18,6 @@ ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
 ENV AIRFLOW_HOME=${AIRFLOW_USER_HOME}
 
-RUN apt-get update -yqq
-RUN apt-get upgrade -yqq
-RUN apt-get install -yqq --no-install-recommends locales locales-all
-
 # Define zh_CN.
 ENV LANGUAGE zh_CN.UTF-8
 ENV LANG zh_CN.UTF-8
@@ -61,8 +57,8 @@ RUN set -ex \
     && pip install pyasn1 \
     && pip install 'Flask==1.0.4' \
     && pip install 'pendulum==1.4.4' \
-    && pip install apache-airflow[crypto,celery,mssql,rabbitmq,redis,slack,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
-#    && pip install 'redis==3.2' \
+    && pip install apache-airflow[crypto,celery,mssql,postgres,rabbitmq,redis,slack,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
+    && pip install 'redis==3.2' \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \
     && apt-get purge --auto-remove -yqq $buildDeps \
     && apt-get autoremove -yqq --purge \

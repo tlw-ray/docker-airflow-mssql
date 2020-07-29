@@ -6,15 +6,15 @@ TRY_LOOP="20"
 : "${REDIS_PORT:="6379"}"
 : "${REDIS_PASSWORD:=""}"
 
-: "${MSSQL_HOST:="mssql"}"
-: "${MSSQL_PORT:="1433"}"
-: "${MSSQL_USER:="airflow"}"
-: "${MSSQL_PASSWORD:="airflow"}"
-: "${MSSQL_DB:="airflow"}"
+: "${POSTGRES_HOST:="postgres"}"
+: "${POSTGRES_PORT:="5432"}"
+: "${POSTGRES_USER:="airflow"}"
+: "${POSTGRES_PASSWORD:="airflow"}"
+: "${POSTGRES_DB:="airflow"}"
 
 # Defaults and back-compat
-#: "${AIRFLOW__CORE__FERNET_KEY:=${FERNET_KEY:=$(python -c "from cryptography.fernet import Fernet; FERNET_KEY = Fernet.generate_key().decode(); print(FERNET_KEY)")}}"
-#: "${AIRFLOW__CORE__EXECUTOR:=${EXECUTOR:-Sequential}Executor}"
+: "${AIRFLOW__CORE__FERNET_KEY:=${FERNET_KEY:=$(python -c "from cryptography.fernet import Fernet; FERNET_KEY = Fernet.generate_key().decode(); print(FERNET_KEY)")}}"
+: "${AIRFLOW__CORE__EXECUTOR:=${EXECUTOR:-Sequential}Executor}"
 
 export \
   AIRFLOW__CELERY__BROKER_URL \
@@ -57,9 +57,9 @@ wait_for_port() {
 }
 
 if [ "$AIRFLOW__CORE__EXECUTOR" != "SequentialExecutor" ]; then
-  AIRFLOW__CORE__SQL_ALCHEMY_CONN="mssql+pymssql://$MSSQL_USER:$MSSQL_PASSWORD@$MSSQL_HOST:$MSSQL_PORT/$MSSQL_DB"
-  AIRFLOW__CELERY__RESULT_BACKEND="db+mssql://$MSSQL_USER:$MSSQL_PASSWORD@$MSSQL_HOST:$MSSQL_PORT/$MSSQL_DB"
-  wait_for_port "MSSql" "$MSSQL_HOST" "$MSSQL_PORT"
+  AIRFLOW__CORE__SQL_ALCHEMY_CONN="postgresql+psycopg2://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB"
+  AIRFLOW__CELERY__RESULT_BACKEND="db+postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB"
+  wait_for_port "Postgres" "$POSTGRES_HOST" "$POSTGRES_PORT"
 fi
 
 if [ "$AIRFLOW__CORE__EXECUTOR" = "CeleryExecutor" ]; then
@@ -67,16 +67,13 @@ if [ "$AIRFLOW__CORE__EXECUTOR" = "CeleryExecutor" ]; then
   wait_for_port "Redis" "$REDIS_HOST" "$REDIS_PORT"
 fi
 
-echo "------------------------------"
-echo "$AIRFLOW__CORE__EXECUTOR"
-
 case "$1" in
   webserver)
     airflow initdb
-    # if [ "$AIRFLOW__CORE__EXECUTOR" = "LocalExecutor" ]; then
+    if [ "$AIRFLOW__CORE__EXECUTOR" = "LocalExecutor" ]; then
       # With the "Local" executor it should all run in one container.
       airflow scheduler &
-    # fi
+    fi
     exec airflow webserver
     ;;
   worker|scheduler)
