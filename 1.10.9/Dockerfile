@@ -56,6 +56,7 @@ RUN set -ex \
         netcat \
         locales \
 	&& update-locale LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8 \
+	&& pip install SQLAlchemy==1.3.15 \
     && pip install -U pip setuptools wheel \
     && pip install pytz \
     && pip install pyOpenSSL \
