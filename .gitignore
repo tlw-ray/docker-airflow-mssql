@@ -11,6 +11,7 @@ Session.vim
 .circleci/
 **/*.ldf
 **/*.mdf
+resource/
 
 ### SublimeText ###
 # cache files for sublime text

@@ -1,0 +1,15 @@
+# VERSION 1.10.11.1
+# AUTHOR: TLW
+# DESCRIPTION: Airflow with datax
+
+FROM tlwtlw/docker-airflow:1.10.12-mssql
+
+ADD ../resource/jdk-8u261-linux-x64.tar.gz /root/
+ADD ../resource/datax.tar.gz /root/
+ADD ../resource/data-integration-7.1 /root/data-integration-7.1
+
+env PATH=${PATH}:/root/jdk1.8.0_151/jre/bin:/root/datax/bin:/root/pdi-ce-7.1.0.0-12/bin
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["webserver"]
+
