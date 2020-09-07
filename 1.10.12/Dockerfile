@@ -79,9 +79,6 @@ RUN set -ex \
 
 COPY entrypoint.sh /entrypoint.sh
 COPY airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
-ADD src/timezone.py /usr/local/lib/python3.6/site-packages/airflow/utils/
-ADD src/sqlalchemy.py /usr/local/lib/python3.6/site-packages/airflow/utils/
-ADD src/master.html /usr/local/lib/python3.6/site-packages/airflow/www/templates/admin/
 
 EXPOSE 8080 5555 8793
 
