@@ -5,7 +5,7 @@ FROM tlwtlw/docker-airflow:1.10.12-mssql
 RUN apt-get update -yqq
 RUN apt-get upgrade -yqq
 RUN apt-get install -yqq --no-install-recommends libtinfo5 
-RUN apt-get install -yqq --no-install-recommends libreadline6
+# RUN apt-get install -yqq --no-install-recommends libreadline6
 RUN apt-get install -yqq --no-install-recommends gnupg
 RUN apt-get install -yqq --no-install-recommends lsb-release
 RUN apt-get install -yqq --no-install-recommends wget
