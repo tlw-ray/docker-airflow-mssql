@@ -1,0 +1,12 @@
+# VERSION 1.10.12.1
+# AUTHOR: TLW
+# DESCRIPTION: Airflow with datax
+
+FROM winning.repo/dcs/docker-airflow:1.10.3-psql
+
+# install java datax kettle
+ADD resource/jdk-8u261-linux-x64.tar.gz /root/
+ADD resource/datax.tar.gz /root/
+ADD resource/data-integration-7.1 /root/data-integration-7.1
+
+env PATH=${PATH}:/root/jdk1.8.0_261/jre/bin:/root/datax/bin:/root/pdi-ce-7.1.0.0-12/bin
