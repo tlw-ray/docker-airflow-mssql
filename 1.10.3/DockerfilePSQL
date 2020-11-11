@@ -1,7 +1,7 @@
 FROM tlwtlw/docker-airflow:1.10.3-mssql
 # change to ali source
-# ADD sources.list /etc/apt/sources.list
-# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
+ADD sources.list /etc/apt/sources.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
 
 # install postgresql psql client
 RUN apt-get update -yqq \
