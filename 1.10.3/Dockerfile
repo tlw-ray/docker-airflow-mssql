@@ -61,6 +61,7 @@ RUN set -ex \
     && pip install pyasn1 \
     && pip install 'Flask==1.0.4' \
     && pip install 'pendulum==1.4.4' \
+	&& pip install 'vine=1.3.0' \
     && pip install apache-airflow[crypto,celery,mssql,postgres,rabbitmq,redis,slack,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
     && pip install 'redis==3.2' \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \
